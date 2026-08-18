@@ -1,0 +1,25 @@
+name: Publish ModelKit
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: publish-modelkit
+
+permissions:
+  contents: read
+
+jobs:
+  pack-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: nathan-young1/kit-pack-push-action@main
+        with:
+          registry: jozu.ml # You can put a different registry here.
+          repository: jonathangamer202002/test-kitops-github-action
+          tag: ${{ github.event.release.tag_name || 'latest' }}
+          username: ${{ secrets.JOZU_USERNAME }}
+          password: ${{ secrets.JOZU_PASSWORD }}
