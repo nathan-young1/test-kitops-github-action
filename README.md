@@ -1,1 +1,1 @@
-Repo to test kitops github actions.
+Repo to test kitops github actions
